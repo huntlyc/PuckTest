@@ -13,7 +13,24 @@
     <path fill="#000000" d="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z" />
   </svg>
   <script src="https://www.puck-js.com/puck.js"></script>
-  <button onclick="Puck.write('LED1.set();\n');">On!</button>
-  <button onclick="Puck.write('LED1.reset();\n');">Off!</button>
- </body>
-</html>
+  <script type="text/javascript">
+    // Get the actual curve inside the SVG. You could make differemt
+    // parts of a more complex SVG do different things...
+    var path = document.getElementsByTagName('path')[0];
+    // Make sure your mouse cursor turns into a hand when over it, and gray it out
+    path.style="cursor:pointer;fill:#BBB";
+    // Now send commands to turn the LED on or off
+    var on = false;
+    path.addEventListener("click", function() {
+      on = !on;
+      if (on) {
+        path.style.fill="red";
+        Puck.write('LED1.set();\n');
+      } else {
+        path.style.fill="#444";
+        Puck.write('LED1.reset();\n');
+      }
+    });
+  </script>
+  </body>
+ </html>
